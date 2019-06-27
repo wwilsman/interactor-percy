@@ -14,9 +14,8 @@ export default function percySnapshot(name, options = {}) {
     let running = true;
 
     await fetch(`http://localhost:${percyAgentClient.port}/percy/healthcheck`)
-      .catch(err => {
+      .catch(() => {
         console.warn('[percy] Percy agent is not running. Skipping snapshots');
-        console.warn(err);
         running = false;
       });
 
