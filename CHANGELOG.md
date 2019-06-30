@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+## [0.2.0]- 2019-06-30
+
+### Fixed
+
+- Take snapshots in parallel
+- Only run healthcheck network check once for performance
+
 ## [0.1.3]- 2019-06-27
 
 ### Removed
