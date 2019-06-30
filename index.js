@@ -3,6 +3,8 @@ import { scoped } from 'interactor.js';
 import { version as interactorVersion } from 'interactor.js/package.json';
 import { version as clientVersion } from './package.json';
 
+let agentRunning = true;
+
 export default function percySnapshot(name, options = {}) {
   const percyAgentClient = new PercyAgent({
     handleAgentCommunication: false,
@@ -10,20 +12,14 @@ export default function percySnapshot(name, options = {}) {
     port: options.port
   });
 
-  return scoped().do(async function() {
-    let running = true;
-
-    await fetch(`http://localhost:${percyAgentClient.port}/percy/healthcheck`)
-      .catch(() => {
-        console.warn('[percy] Percy agent is not running. Skipping snapshots');
-        running = false;
-      });
-
-    if (running) {
+  return scoped().do(function() {
+    // don't bother if we already know agent is not running
+    if (agentRunning) {
       let doc = this.$dom.document;
       let domSnapshot = percyAgentClient.snapshot(name, { doc, ...options });
 
-      await fetch(`http://localhost:${percyAgentClient.port}/percy/snapshot`, {
+      // not awaited on to allow sending snapshots in parallel
+      fetch(`http://localhost:${percyAgentClient.port}/percy/snapshot`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -35,6 +31,12 @@ export default function percySnapshot(name, options = {}) {
           environmentInfo: `interactor.js/${interactorVersion}`,
           domSnapshot
         })
+      }).catch(() => {
+        // another check in case multiple snapshots were sent in succession
+        if (agentRunning) {
+          console.warn('[percy] Percy agent is not running. Skipping snapshots');
+          agentRunning = false;
+        }
       });
     }
   });
