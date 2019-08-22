@@ -11,10 +11,10 @@
     "postpublish": ".circleci/tag"
   },
   "dependencies": {
-    "@percy/agent": "^0.7.2"
+    "@percy/agent": "~0"
   },
   "peerDependencies": {
-    "interactor.js": "^1.4.3"
+    "interactor.js": "~1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.2",
