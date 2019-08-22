@@ -1,6 +1,6 @@
 {
   "name": "@interactor/percy",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Take Percy snapshots with Interactor.js",
   "author": "Wil Wilsman <wil@wilwilsman.com>",
   "license": "MIT",
