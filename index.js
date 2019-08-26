@@ -27,6 +27,7 @@ export default function percySnapshot(name, options = {}) {
           url: doc.URL,
           enableJavaScript: options.enableJavaScript,
           widths: options.widths,
+          minHeight: options.minHeight,
           clientInfo: `@interactor/percy/${clientVersion}`,
           environmentInfo: `interactor.js/${interactorVersion}`,
           domSnapshot
