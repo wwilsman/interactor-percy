@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+## [0.2.2] - 2019-08-26
+
 ### Fixed
 
 - `minHeight` option not being passed to agent
