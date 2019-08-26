@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 - `minHeight` option not being passed to agent
 
+### Security
+
+- Update all dev dependencies
+
 ## [0.2.1] - 2019-08-22
 
 ### Security
